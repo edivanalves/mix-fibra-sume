@@ -8,7 +8,13 @@ const NavLink = ({ href, text, refLink, activeSection, scrollToSection, isMobile
 
   const desktopClasses = `
     relative text-sm font-medium rounded-full transition-colors duration-200 px-4 py-2
-    ${isActive ? 'bg-orange-500 text-white' : 'text-slate-200 hover:bg-slate-700/50'}
+    group // Adicione esta classe para usar o hover no after
+    ${isActive 
+        ? 'bg-orange-500 text-white' // Estilo para o link ativo
+        : 'text-slate-200 hover:bg-slate-700/50'
+    }
+    after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-0.5 after:bg-orange-400 after:transition-all after:duration-300 after:-translate-x-1/2 
+    ${isActive ? 'after:w-full' : 'group-hover:after:w-full'} // Condição para o sublinhado no ativo e no hover
   `;
 
   const mobileClasses = `
@@ -62,6 +68,7 @@ const Navbar = ({ refs, activeSection }) => {
     { href: 'video-section', text: 'Vídeos', ref: refs.videoRef },
     { href: 'about', text: 'Sobre', ref: refs.aboutRef },
     { href: 'contact', text: 'Contato', ref: refs.contactRef },
+    { href: 'solicitation-form', text: 'Solicite Agora', ref: refs.solicitationRef }, // <-- IMPORTANTE: NOVO LINK AQUI
   ];
 
   return (
@@ -91,7 +98,7 @@ const Navbar = ({ refs, activeSection }) => {
             ))}
           </div>
           
-          {/* Botões de Ação Desktop */}
+          {/* Botões de Ação Desktop (Mantido para a Central do Assinante, mas você pode mover/ajustar) */}
           <div className="hidden md:flex items-center gap-4">
             <a
               href="https://mixfibra.sgp.net.br/central/home/"
@@ -137,6 +144,7 @@ const Navbar = ({ refs, activeSection }) => {
                 />
              </div>
           ))}
+           {/* O botão da Central do Assinante também pode ser adicionado aqui no menu mobile, se desejar */}
            <a
               href="https://mixfibra.sgp.net.br/central/home/"
               target="_blank"

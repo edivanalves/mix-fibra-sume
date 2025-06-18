@@ -65,7 +65,7 @@ const plansData = [
     advantages: [
       { text: "Streaming sem travar", icon: advantagesIcons.stream },
       { text: "Wi-Fi 5G", icon: advantagesIcons.wifi },
-      { text: "Até 3 dispositivos", icon: advantagesIcons.games },
+      { text: "Acima de 4 dispositivos", icon: advantagesIcons.games },
     ],
   },
   {
@@ -164,7 +164,7 @@ const PlanCard = memo(({ plan, index, isInView }) => {
             <span className="text-xl align-top mr-1">R$</span>
             {plan.price}
           </p>
-          // Código MODIFICADO:
+          
 <button
     className={`w-full py-3 mt-4 font-bold rounded-lg shadow-lg text-white text-base tracking-wide transition-all duration-300 transform hover:scale-105 focus:outline-none active:scale-95 ${isHighlighted ? 'bg-gradient-to-r from-orange-500 to-yellow-400 ring-2 ring-orange-400/50' : 'bg-gradient-to-r from-cyan-600 to-blue-600'}`} // <-- ADICIONADO AQUI
     onClick={() => window.open(`https://wa.me/5583996411187?text=Olá!%20Quero%20assinar%20o%20plano%20de%20${plan.megas}MB`, '_blank')}

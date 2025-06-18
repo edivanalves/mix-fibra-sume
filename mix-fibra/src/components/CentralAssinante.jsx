@@ -1,3 +1,5 @@
+// Caminho: src/components/CentralAssinante.jsx
+
 import React from 'react';
 
 const CentralAssinante = React.forwardRef(({ loading }, ref) => {
@@ -15,7 +17,7 @@ const CentralAssinante = React.forwardRef(({ loading }, ref) => {
       </p>
       <a
         href="https://mixfibra.sgp.net.br/accounts/central/login?next=/central/home/"
-        target="_blank"
+        target="_blank" // Continua abrindo em nova aba
         rel="noopener noreferrer"
         className="inline-flex items-center gap-3 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 text-white font-extrabold py-4 px-10 rounded-full text-xl shadow-lg transition-all duration-300 hover:scale-105"
       >

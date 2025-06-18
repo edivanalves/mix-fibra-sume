@@ -18,6 +18,7 @@ import SpeedTest from './components/SpeedTest';
 import CentralAssinante from './components/CentralAssinante';
 import Footer from './components/Footer';
 import ThemeToggle from './components/ThemeToggle';
+import SolicitationForm from './components/SolicitationForm'; // <-- IMPORTANTE: Novo componente de formulário
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -31,6 +32,7 @@ function App() {
   const aboutRef = useRef(null);
   const contactRef = useRef(null);
   const centralRef = useRef(null);
+  const solicitationRef = useRef(null); // <-- IMPORTANTE: NOVA REF PARA O FORMULÁRIO
   
   // Agrupando as refs para facilitar a observação
   const sectionRefs = [
@@ -39,8 +41,9 @@ function App() {
     { id: 'video-section', ref: videoRef },
     { id: 'support-section', ref: supportRef },
     { id: 'about', ref: aboutRef },
-    { id: 'contact', ref: contactRef }, // Esta é a linha que estava com o erro de sintaxe
+    { id: 'contact', ref: contactRef },
     { id: 'central-assinante', ref: centralRef },
+    { id: 'solicitation-form', ref: solicitationRef }, // <-- IMPORTANTE: ADICIONANDO A NOVA REF AQUI
   ];
 
   // Efeito para o loading inicial e para observar as seções
@@ -73,13 +76,13 @@ function App() {
         }
       });
     };
-  }, []);
+  }, []); // Dependências ajustadas se necessário, para garantir que observe apenas uma vez ou reaja a mudanças controladas
 
   return (
     <div className="w-full bg-blue-950">
       <ThemeToggle />
       <Navbar 
-        refs={{ homeRef, plansRef, videoRef, supportRef, aboutRef, contactRef, centralRef }} 
+        refs={{ homeRef, plansRef, videoRef, supportRef, aboutRef, contactRef, centralRef, solicitationRef }} // <-- IMPORTANTE: PASSE A NOVA REF PARA A NAVBAR
         activeSection={activeSection} 
       />
       <div className="relative z-10">
@@ -95,6 +98,7 @@ function App() {
         <Faq loading={loading} />
         <SpeedTest />
         <CentralAssinante ref={centralRef} loading={loading} />
+        <SolicitationForm ref={solicitationRef} /> {/* <-- IMPORTANTE: RENDERIZE O NOVO COMPONENTE AQUI */}
       </div>
       <Footer />
     </div>
