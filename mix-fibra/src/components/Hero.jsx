@@ -36,11 +36,11 @@ const Hero = React.forwardRef(({ loading, scrollToPlans }, ref) => {
             </p>
             <div>
               <button
-                onClick={scrollToPlans}
-                className="bg-orange-500 text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg shadow-orange-500/30 transition-all duration-300 transform hover:scale-105 hover:shadow-orange-500/50 focus:outline-none"
-              >
-                Conhecer Planos
-              </button>
+    onClick={scrollToPlans}
+    className="bg-orange-500 text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg shadow-orange-500/30 transition-all duration-300 transform hover:scale-105 hover:shadow-orange-500/50 focus:outline-none active:scale-95" // <-- ADICIONADO AQUI
+>
+    Conhecer Planos
+</button>
             </div>
           </div>
           
