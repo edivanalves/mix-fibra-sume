@@ -72,9 +72,8 @@ body {
 }
 
 .hamburger-line {
-  @apply block w-6 h-0.5 bg-white transition-all duration-300;
+  @apply block w-6 h-1 bg-white rounded-full transition-all duration-300; /* Alterado h-0.5 para h-1 e adicionado rounded-full */
 }
-
 @property --angle {
   syntax: '<angle>';
   inherits: false;
