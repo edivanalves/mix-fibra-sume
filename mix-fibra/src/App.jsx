@@ -14,11 +14,11 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Support from './components/Support';
 import Faq from './components/Faq';
-import SpeedTest from './components/SpeedTest';
+import SpeedTest from './components/SpeedTest'; // Importando SpeedTest
 import CentralAssinante from './components/CentralAssinante';
 import Footer from './components/Footer';
 import ThemeToggle from './components/ThemeToggle';
-import SolicitationForm from './components/SolicitationForm'; // <-- IMPORTANTE: Novo componente de formulário
+import SolicitationForm from './components/SolicitationForm';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -32,7 +32,8 @@ function App() {
   const aboutRef = useRef(null);
   const contactRef = useRef(null);
   const centralRef = useRef(null);
-  const solicitationRef = useRef(null); // <-- IMPORTANTE: NOVA REF PARA O FORMULÁRIO
+  const solicitationRef = useRef(null);
+  const speedTestRef = useRef(null); // <-- NOVO: Ref para SpeedTest
   
   // Agrupando as refs para facilitar a observação
   const sectionRefs = [
@@ -43,7 +44,8 @@ function App() {
     { id: 'about', ref: aboutRef },
     { id: 'contact', ref: contactRef },
     { id: 'central-assinante', ref: centralRef },
-    { id: 'solicitation-form', ref: solicitationRef }, // <-- IMPORTANTE: ADICIONANDO A NOVA REF AQUI
+    { id: 'solicitation-form', ref: solicitationRef },
+    { id: 'speedtest-section', ref: speedTestRef }, // <-- NOVO: Adicionando a ref do SpeedTest
   ];
 
   // Efeito para o loading inicial e para observar as seções
@@ -76,13 +78,13 @@ function App() {
         }
       });
     };
-  }, []); // Dependências ajustadas se necessário, para garantir que observe apenas uma vez ou reaja a mudanças controladas
+  }, []);
 
   return (
     <div className="w-full bg-blue-950">
       <ThemeToggle />
       <Navbar 
-        refs={{ homeRef, plansRef, videoRef, supportRef, aboutRef, contactRef, centralRef, solicitationRef }} // <-- IMPORTANTE: PASSE A NOVA REF PARA A NAVBAR
+        refs={{ homeRef, plansRef, videoRef, supportRef, aboutRef, contactRef, centralRef, solicitationRef, speedTestRef }} // <-- NOVO: Passando a ref do SpeedTest para a Navbar
         activeSection={activeSection} 
       />
       <div className="relative z-10">
@@ -96,9 +98,9 @@ function App() {
         <Contact ref={contactRef} loading={loading} />
         <Support ref={supportRef} loading={loading} />
         <Faq loading={loading} />
-        <SpeedTest />
+        <SpeedTest ref={speedTestRef} loading={loading} /> {/* <-- NOVO: Passando a ref e loading para o SpeedTest */}
         <CentralAssinante ref={centralRef} loading={loading} />
-        <SolicitationForm ref={solicitationRef} /> {/* <-- IMPORTANTE: RENDERIZE O NOVO COMPONENTE AQUI */}
+        <SolicitationForm ref={solicitationRef} />
       </div>
       <Footer />
     </div>

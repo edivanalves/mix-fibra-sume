@@ -1,9 +1,14 @@
+// Caminho: src/components/SpeedTest.jsx
+
 import React from 'react';
 
-const SpeedTest = () => {
+// IMPORTANTE: Adicionado React.forwardRef para que o componente possa receber a ref do pai
+const SpeedTest = React.forwardRef(({ loading }, ref) => { // Recebendo 'loading' e 'ref'
   return (
     <section
-      className="w-full py-20 px-4 bg-gradient-to-br from-blue-900 via-blue-950 to-indigo-900 text-center shadow-2xl mt-12 rounded-3xl max-w-6xl mx-auto mb-12"
+      id="speedtest-section" // Adicione um ID para a seção para que a Navbar possa direcionar
+      ref={ref} // Anexando a ref à seção
+      className={`w-full py-20 px-4 bg-gradient-to-br from-blue-900 via-blue-950 to-indigo-900 text-center shadow-2xl mt-12 rounded-3xl max-w-6xl mx-auto mb-12 transition-opacity duration-500 ${loading ? 'opacity-0' : 'opacity-100'}`} // Ajustado py-20, mt-12, mb-12
     >
       <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-8 drop-shadow-lg">
         Teste sua <span className="text-orange-400">Velocidade</span>
@@ -16,13 +21,13 @@ const SpeedTest = () => {
           href="https://www.speedtest.net/pt/"
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 text-white font-extrabold py-4 px-10 rounded-full text-2xl shadow-lg transition-all duration-300 hover:scale-105"
+          className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 text-white font-extrabold py-4 px-10 rounded-full text-xl shadow-lg transition-all duration-300 hover:scale-105 active:scale-95" // Adicionado active:scale-95
         >
           Medir Velocidade da Internet
         </a>
       </div>
     </section>
   );
-};
+});
 
 export default SpeedTest;

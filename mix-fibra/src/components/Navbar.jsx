@@ -68,7 +68,8 @@ const Navbar = ({ refs, activeSection }) => {
     { href: 'video-section', text: 'Vídeos', ref: refs.videoRef },
     { href: 'about', text: 'Sobre', ref: refs.aboutRef },
     { href: 'contact', text: 'Contato', ref: refs.contactRef },
-    { href: 'solicitation-form', text: 'Solicite Agora', ref: refs.solicitationRef }, // <-- IMPORTANTE: NOVO LINK AQUI
+    { href: 'solicitation-form', text: 'Solicite Agora', ref: refs.solicitationRef },
+    { href: 'speedtest-section', text: 'Teste de Velocidade', ref: refs.speedTestRef }, // <-- NOVO: LINK PARA TESTE DE VELOCIDADE
   ];
 
   return (
@@ -98,7 +99,7 @@ const Navbar = ({ refs, activeSection }) => {
             ))}
           </div>
           
-          {/* Botões de Ação Desktop (Mantido para a Central do Assinante, mas você pode mover/ajustar) */}
+          {/* Botões de Ação Desktop */}
           <div className="hidden md:flex items-center gap-4">
             <a
               href="https://mixfibra.sgp.net.br/central/home/"

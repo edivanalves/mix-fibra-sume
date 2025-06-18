@@ -6,21 +6,27 @@ import React, { useState } from 'react';
 const SolicitationForm = React.forwardRef(({ }, ref) => {
     // Lista das cidades que a empresa trabalha
     const workingCities = ["Sumé", "Congo", "Camalaú", "Caraúbas", "Outra Cidade"]; 
+    // Datas disponíveis para pagamento
+    const paymentDays = ["10", "20", "30"];
+    // Períodos do dia disponíveis para instalação
+    const installationPeriods = ["Manhã", "Tarde"]; // <-- NOVO: Períodos do dia
 
     const [formData, setFormData] = useState({
         fullName: '',
         cpfCnpj: '',
         phone: '',
-        email: '',          // Será opcional
+        email: '',
         zipCode: '',
         street: '',
         number: '',
         neighborhood: '',
         complement: '',
-        city: '',           // Será um select
+        city: '',
         state: '',
-        desiredPlan: '', // Para o plano recomendado/selecionado
+        desiredPlan: '',
         installationDate: '',
+        installationPeriod: '', // <-- NOVO CAMPO: Período de instalação
+        bestPaymentDay: '',
         message: ''
     });
 
@@ -55,6 +61,8 @@ const SolicitationForm = React.forwardRef(({ }, ref) => {
         *Detalhes da Solicitação:*
         Plano Desejado: ${formData.desiredPlan || 'Não especificado'}
         Data Preferencial para Instalação: ${formData.installationDate || 'Não informada'}
+        Período Preferencial de Instalação: ${formData.installationPeriod || 'Não informado'} <-- NOVO CAMPO NA MENSAGEM
+        Melhor Dia de Pagamento: ${formData.bestPaymentDay || 'Não informado'}
         ${formData.message ? `Mensagem Adicional: ${formData.message}` : ''}
 
         Por favor, entrem em contato para dar andamento à solicitação.
@@ -71,7 +79,7 @@ const SolicitationForm = React.forwardRef(({ }, ref) => {
             setFormData({ // Limpa o formulário após o sucesso
                 fullName: '', cpfCnpj: '', phone: '', email: '',
                 zipCode: '', street: '', number: '', neighborhood: '', complement: '',
-                city: '', state: '', desiredPlan: '', installationDate: '', message: ''
+                city: '', state: '', desiredPlan: '', installationDate: '', installationPeriod: '', bestPaymentDay: '', message: '' // Limpa o novo campo também
             });
         } catch (error) {
             console.error('Erro ao abrir o WhatsApp ou enviar solicitação:', error);
@@ -85,7 +93,7 @@ const SolicitationForm = React.forwardRef(({ }, ref) => {
         <section 
             id="solicitation-form" 
             ref={ref} // IMPORTANTE: Anexando a ref à seção
-            className="w-full py-16 px-4 bg-gradient-to-br from-blue-900 via-blue-950 to-indigo-900 text-center shadow-2xl mt-12 rounded-3xl max-w-6xl mx-auto mb-12"
+            className="w-full py-20 px-4 bg-gradient-to-br from-blue-900 via-blue-950 to-indigo-900 text-center shadow-2xl mt-12 rounded-3xl max-w-6xl mx-auto mb-12"
         >
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 drop-shadow-lg">
                 Solicite Sua <span className="text-orange-400">Internet</span>
@@ -157,16 +165,52 @@ const SolicitationForm = React.forwardRef(({ }, ref) => {
                 </div>
 
                 {/* Data de Instalação Preferencial */}
-                <div className="mb-6">
-                    <label htmlFor="installationDate" className="block text-blue-200 text-sm font-bold mb-2">Data Preferencial para Instalação</label>
-                    <input
-                        type="date"
-                        id="installationDate"
-                        name="installationDate"
-                        value={formData.installationDate}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8"> {/* Alterado de mb-6 para mb-8 e adicionado grid */}
+                    <div>
+                        <label htmlFor="installationDate" className="block text-blue-200 text-sm font-bold mb-2">Data Preferencial para Instalação</label>
+                        <input
+                            type="date"
+                            id="installationDate"
+                            name="installationDate"
+                            value={formData.installationDate}
+                            onChange={handleChange}
+                            className="w-full p-3 rounded-lg bg-blue-900 text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        />
+                    </div>
+
+                    {/* NOVO CAMPO: Período de Instalação */}
+                    <div>
+                        <label htmlFor="installationPeriod" className="block text-blue-200 text-sm font-bold mb-2">Período Preferencial</label>
+                        <select
+                            id="installationPeriod"
+                            name="installationPeriod"
+                            value={formData.installationPeriod}
+                            onChange={handleChange}
+                            className="w-full p-3 rounded-lg bg-blue-900 text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        >
+                            <option value="">Selecione o período</option>
+                            {installationPeriods.map((period, index) => (
+                                <option key={index} value={period}>{period}</option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+
+                {/* Melhor Dia de Pagamento */}
+                <div className="mb-8">
+                    <label htmlFor="bestPaymentDay" className="block text-blue-200 text-sm font-bold mb-2">Melhor Dia de Pagamento</label>
+                    <select
+                        id="bestPaymentDay"
+                        name="bestPaymentDay"
+                        value={formData.bestPaymentDay}
                         onChange={handleChange}
                         className="w-full p-3 rounded-lg bg-blue-900 text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
-                    />
+                    >
+                        <option value="">Selecione o dia</option>
+                        {paymentDays.map((day, index) => (
+                            <option key={index} value={day}>{day}</option>
+                        ))}
+                    </select>
                 </div>
 
                 {/* Mensagem Adicional */}
