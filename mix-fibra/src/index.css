@@ -1,0 +1,158 @@
+/* Caminho: src/index.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos que adicionamos anteriormente */
+
+body {
+  @apply bg-blue-950 text-white flex flex-col items-center min-h-screen w-full overflow-x-hidden;
+}
+
+.nebula-bg {
+  background: radial-gradient(ellipse at 70% 30%, #1e40af, transparent),
+              radial-gradient(ellipse at 30% 70%, #5b21b6, transparent);
+  animation: nebula-flow 25s ease-in-out infinite alternate;
+  background-size: 200% 200%;
+}
+
+@keyframes nebula-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.loader {
+  width: 60px;
+  height: 60px;
+  border: 5px solid #fff;
+  border-bottom-color: #ff9800;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.faq-item {
+  @apply border-b border-blue-700;
+}
+.faq-question {
+  @apply flex justify-between items-center w-full text-left text-lg font-semibold p-4 cursor-pointer hover:bg-blue-800/50 transition-colors;
+}
+.faq-answer {
+  @apply max-h-0 overflow-hidden transition-all duration-500 ease-in-out;
+}
+.faq-answer.open {
+  @apply max-h-96 p-4 bg-blue-900/50;
+}
+.faq-arrow {
+  @apply transition-transform duration-300;
+}
+.faq-arrow.rotate {
+  @apply rotate-180;
+}
+
+.nav-link {
+    @apply text-white font-semibold hover:text-orange-400 transition-all duration-200 relative py-2 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-0.5 after:bg-orange-400 after:transition-all after:duration-300 after:-translate-x-1/2 hover:after:w-full;
+}
+
+.nav-link-mobile {
+    @apply block text-lg font-semibold text-center text-white py-2 rounded-lg hover:bg-blue-800 transition-colors;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.hamburger-line {
+  @apply block w-6 h-0.5 bg-white transition-all duration-300;
+}
+
+@property --angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+.animated-border {
+  position: relative;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  isolation: isolate;
+}
+
+.animated-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--angle),
+    #0ea5e9,
+    #eab308,
+    #0ea5e9
+  );
+  animation: rotate 5s linear infinite;
+}
+
+.visualizer-bar {
+  background-color: #0ea5e9;
+  box-shadow: 0 0 5px #0ea5e9, 0 0 10px #0ea5e9;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.text-focus-in {
+	animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+@keyframes text-focus-in {
+  0% {
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+.text-slide-in-bottom {
+	animation: text-slide-in-bottom 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes text-slide-in-bottom {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
